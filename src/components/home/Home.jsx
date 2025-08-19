@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import PromoCard from "../PromoCard/PromoCard";
 import FeatureSection from "../FeatureSection/FeatureSection";
-import FeaturedProductSection from "../FeaturedProductSection/FeaturedProductSection";
+import FeaturedProductSection from "../Product/FeaturedProductSection";
 
 const slides = [
   {
@@ -107,14 +107,14 @@ const Home = () => {
 
       {/* Promo Cards */}
       <div className="mt-4 bg-gray-50 px-4 md:px-12 py-6 flex flex-col md:flex-row gap-4">
-        {/* Left card */}
+        {/* Left  Promo card */}
         <div className="md:w-1/2 min-h-[400px]">
           <PromoCard slide={slides[0]} height="h-104" />
         </div>
 
-        {/* Right card */}
+        {/* Right  Promo card */}
         <div className="md:w-1/2 flex flex-col gap-4">
-          {/*Right Top  Cards*/}
+          {/*Right Top  Promo Cards*/}
           <div className="flex gap-4">
             <div className="w-1/2">
               <PromoCard slide={slides[1]} height="h-50" />
@@ -124,7 +124,7 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Right Bottom  */}
+          {/* Right Bottom  Promo Card */}
           <div>
             <PromoCard slide={slides[3]} height="h-50" />
           </div>

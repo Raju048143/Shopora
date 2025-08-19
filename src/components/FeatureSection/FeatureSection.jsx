@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaTruck, FaLock, FaMoneyBillWave, FaHeadset } from "react-icons/fa";
-import FeatureCard from '../FeatureCard/FeatureCard';
+import FeatureCard from './FeatureCard';
 
 const features = [
   {
