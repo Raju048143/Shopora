@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import ProductImage from "./ProductImage";
 import { CartContext } from "../../Context/CartContext";
 
-
 function ProductCard({ product }) {
   const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
@@ -12,8 +11,7 @@ function ProductCard({ product }) {
     navigate(`/product/${product.id}`, { state: { product } });
   };
 
-    const handleAddToCart = (e) => {
-      console.log(product)
+  const handleAddToCart = (e) => {
     e.stopPropagation();
     addToCart(product);
   };
@@ -27,7 +25,7 @@ function ProductCard({ product }) {
       <p className="text-gray-500 text-sm mb-1">Brand: {product.brand}</p>
       <p className="text-blue-600 font-semibold text-lg">${product.price}</p>
       <button
-        onClick={ handleAddToCart}
+        onClick={handleAddToCart}
         className="w-full bg-blue-600 rounded p-2 text-white hover:bg-blue-900"
       >
         Add to Cart

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
+import { CartContext } from "../../Context/CartContext";
 import {
   FaHome,
   FaPhoneAlt,
@@ -14,7 +15,6 @@ import Logo from "../../assets/ShoporaLogo.png";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-
   const centerNav = [
     { name: "Home", path: "/", icon: <FaHome /> },
     { name: "About", path: "/about", icon: <FaAddressCard /> },
@@ -40,28 +40,28 @@ function Header() {
         {/* Center nav (desktop) */}
         <nav className="hidden sm:flex items-center gap-6">
           {centerNav.map((item, index) => (
-            <a
+            <Link
               key={index}
-              href={item.path}
+              to={item.path}
               className="flex items-center gap-2 text-gray-300 hover:text-white"
             >
               {item.icon}
               {item.name}
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* Right nav (desktop) */}
         <nav className="hidden sm:flex items-center gap-6">
           {rightNav.map((item, index) => (
-            <a
+            <Link
               key={index}
-              href={item.path}
+              to={item.path}
               className="flex items-center gap-2 text-gray-300 hover:text-white"
             >
               {item.icon}
               {item.name}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -79,26 +79,26 @@ function Header() {
         <nav className="sm:hidden flex flex-col gap-4 p-4 border-t border-gray-700 bg-gray-800">
           {/* Center nav items */}
           {centerNav.map((item, index) => (
-            <a
+            <Link
               key={index}
-              href={item.path}
+              to={item.path}
               className="flex items-center gap-2 text-gray-300 hover:text-white"
             >
               {item.icon}
               {item.name}
-            </a>
+            </Link>
           ))}
 
           {/* Right nav items */}
           {rightNav.map((item, index) => (
-            <a
+            <Link
               key={index}
-              href={item.path}
+              to={item.path}
               className="flex items-center gap-2 text-gray-300 hover:text-white"
             >
               {item.icon}
               {item.name}
-            </a>
+            </Link>
           ))}
         </nav>
       )}

@@ -1,18 +1,24 @@
-import React from 'react'
-import {useLocation } from "react-router-dom";
+import React, { useContext } from "react";
+import { useLocation } from "react-router-dom";
 import ProductImage from "./ProductImage";
+import { CartContext } from "../../Context/CartContext";
 
 function ProductDetails() {
-    const location = useLocation();
+  const location = useLocation();
   const product = location.state?.product;
+  const { addToCart } = useContext(CartContext);
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
+    addToCart(product);
+  };
   if (!product) {
     return <p className="text-center mt-10">Loading product details...</p>;
   }
   return (
-       <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
       <div className="flex items-start justify-center">
         <ProductImage
-          src={product.thumbnail} 
+          src={product.thumbnail}
           alt={product.title}
           className="h-[400px]"
         />
@@ -29,13 +35,16 @@ function ProductDetails() {
           <button className="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition">
             Buy Now
           </button>
-          <button className="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition">
+          <button
+            onClick={handleAddToCart}
+            className="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition"
+          >
             Add to Cart
           </button>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default ProductDetails
+export default ProductDetails;
