@@ -10,7 +10,6 @@ function ProductDetails() {
   }
   return (
        <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-      {/* Left - Product Image */}
       <div className="flex items-start justify-center">
         <ProductImage
           src={product.thumbnail} 
@@ -18,8 +17,6 @@ function ProductDetails() {
           className="h-[400px]"
         />
       </div>
-
-      {/* Right - Details */}
       <div className="flex flex-col justify-start">
         <h1 className="text-3xl font-bold mb-3">{product.title}</h1>
         <p className="text-gray-600 mb-2">Brand: {product.brand}</p>

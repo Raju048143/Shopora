@@ -3,14 +3,11 @@ import React from "react";
 function Contact() {
   return (
     <div className="bg-gray-50 min-h-screen py-12 px-6 md:px-16">
-      {/* Page Heading */}
       <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">
         Contact <span className="text-blue-600">Shopora</span>
       </h1>
-
-      {/* Contact Info + Form */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* Left - Contact Info */}
+
         <div className="space-y-6">
           <h2 className="text-2xl font-semibold text-gray-800">Get in Touch</h2>
           <p className="text-gray-600 leading-relaxed">
@@ -34,7 +31,6 @@ function Contact() {
           </div>
         </div>
 
-        {/* Right - Contact Form */}
         <div className="bg-white shadow-md rounded-xl p-8">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Send Us a Message

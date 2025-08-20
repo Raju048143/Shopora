@@ -3,14 +3,10 @@ import aboutImage from "../../assets/ShoporaLogo.png";
 function About() {
   return (
     <div className="bg-gray-50 min-h-screen py-12 px-6 md:px-16">
-      {/* Page Heading */}
       <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">
         About <span className="text-blue-600">Shopora</span>
       </h1>
-
-      {/* Hero Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        {/* Left - Image */}
         <div className="flex justify-center">
           <img
             src={aboutImage}
@@ -18,8 +14,6 @@ function About() {
             className="rounded-2xl shadow-lg w-full md:w-4/5 object-cover"
           />
         </div>
-
-        {/* Right - Text */}
         <div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">
             Who We Are
@@ -43,8 +37,7 @@ function About() {
           </p>
         </div>
       </div>
-
-      {/* Values Section */}
+      
       <div className="mt-16">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-8">
           Our Core Values

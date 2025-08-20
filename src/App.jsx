@@ -1,16 +1,18 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import About from "./pages/About/About";
-import Contact from "./pages/Contact/Contact";
-import ProductDetail from "./pages/Home/ProductDetail";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Home, About, Contact, ProductDetail } from "./pages";
+import { Cart, Profile, Wishlist } from "./components";
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/wishlist" element={<Wishlist />} />
+      <Route path="/cart" element={<Cart />} />
       <Route path="product/:id" element={<ProductDetail />} />
+      <Route path="/cart" element={<Cart />} />
     </Routes>
   );
 }
