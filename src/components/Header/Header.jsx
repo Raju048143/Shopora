@@ -10,6 +10,8 @@ import {
   FaSearch,
   FaHeart,
   FaShoppingCart,
+   FaSignInAlt,
+   FaUserPlus 
 } from "react-icons/fa";
 import Logo from "../../assets/ShoporaLogo.png";
 
@@ -19,6 +21,8 @@ function Header() {
     { name: "Home", path: "/", icon: <FaHome /> },
     { name: "About", path: "/about", icon: <FaAddressCard /> },
     { name: "Contact", path: "/contact", icon: <FaPhoneAlt /> },
+    { name: "Login", path: "/login", icon: <FaSignInAlt /> },
+    { name: "SignUp", path: "/signup", icon: <FaUserPlus /> },
   ];
 
   const rightNav = [

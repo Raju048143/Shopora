@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home, About, Contact, ProductDetail } from "./pages";
-import { Cart, Profile, Wishlist } from "./components";
+import { Cart, Profile, Wishlist, Login, Signup } from "./components";
 function App() {
   return (
     <Routes>
@@ -13,6 +13,8 @@ function App() {
       <Route path="/cart" element={<Cart />} />
       <Route path="product/:id" element={<ProductDetail />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
     </Routes>
   );
 }
