@@ -5,13 +5,13 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-
+  const API_BASE_URL = import.meta.env.VITE_API_URL;
   const handleSignup = async (e) => {
     e.preventDefault();
     setMessage("");
 
     try {
-      const res = await fetch("http://localhost:3000/auth/signup", {
+      const res = await fetch(`${API_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
