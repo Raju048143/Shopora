@@ -29,6 +29,7 @@ const Login = () => {
       }
     } catch (err) {
       setMessage("Network error");
+      console.log(err)
       console.error(err);
     }
   };
