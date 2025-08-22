@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/useAuthstore";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -8,6 +10,8 @@ const Signup = () => {
   const [message, setMessage] = useState("");
   const API_BASE_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
+
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -22,7 +26,9 @@ const Signup = () => {
 
       const data = await res.json();
       if (res.ok) {
-        setMessage(`Success! User ID: ${data.userId}`);
+        setMessage(`Registration successful! Welcome ${data.user.name}`);
+        setUser(data.user);
+        navigate("/");
       } else {
         setMessage(data.message || "Signup failed");
       }
@@ -35,7 +41,9 @@ const Signup = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Sign Up</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+          Sign Up
+        </h2>
 
         {message && (
           <p className="mb-4 text-center text-sm text-red-500">{message}</p>
@@ -87,7 +95,15 @@ const Signup = () => {
         </form>
 
         <p className="mt-4 text-center text-gray-600 text-sm">
-          Already have an account? <span className="text-blue-500 font-medium">Login</span>
+          Already have an account?{" "}
+          <span className="text-blue-500 font-medium">
+            <Link
+              to="/login"
+              className="text-blue-500 font-medium hover:underline"
+            >
+              Login
+            </Link>
+          </span>
         </p>
       </div>
     </div>

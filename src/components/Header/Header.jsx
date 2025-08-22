@@ -1,5 +1,5 @@
-import React, { useState} from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FiMenu, FiX } from "react-icons/fi";
 import { CartContext } from "../../Context/CartContext";
 import {
@@ -10,13 +10,24 @@ import {
   FaSearch,
   FaHeart,
   FaShoppingCart,
-   FaSignInAlt,
-   FaUserPlus 
+  FaSignInAlt,
+  FaUserPlus,
+  FaSignOutAlt,
 } from "react-icons/fa";
 import Logo from "../../assets/ShoporaLogo.png";
+import useAuthStore from "../../store/useAuthstore";
 
 function Header() {
+  const user = useAuthStore((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const clearUser = useAuthStore((state) => state.clearUser);
+
+  const handleLogout = () => {
+    clearUser();
+    document.cookie = "token=; Max-Age=0";
+    navigate("/");
+  };
   const centerNav = [
     { name: "Home", path: "/", icon: <FaHome /> },
     { name: "About", path: "/about", icon: <FaAddressCard /> },
@@ -37,22 +48,32 @@ function Header() {
       <div className="flex items-center justify-between p-4 max-w-7xl mx-auto">
         <div className="flex items-center">
           <Link to="/">
-        <img src={Logo} alt="Shopora Logo" className="h-10 w-auto rounded cursor-pointer" />
-      </Link>
+            <img
+              src={Logo}
+              alt="Shopora Logo"
+              className="h-10 w-auto rounded cursor-pointer"
+            />
+          </Link>
         </div>
 
         {/* Center nav (desktop) */}
         <nav className="hidden sm:flex items-center gap-6">
-          {centerNav.map((item, index) => (
-            <Link
-              key={index}
-              to={item.path}
-              className="flex items-center gap-2 text-gray-300 hover:text-white"
-            >
-              {item.icon}
-              {item.name}
-            </Link>
-          ))}
+          {centerNav.map((item, index) => {
+            if (user && (item.name === "SignUp" || item.name === "Login")) {
+              return null;
+            }
+
+            return (
+              <Link
+                key={index}
+                to={item.path}
+                className="flex items-center gap-2 text-gray-300 hover:text-white"
+              >
+                {item.icon}
+                {item.name}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right nav (desktop) */}
@@ -67,6 +88,14 @@ function Header() {
               {item.name}
             </Link>
           ))}
+           {user && (
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 text-gray-300 hover:text-white ml-4"
+          >
+            <FaSignOutAlt/> Logout
+          </button>
+        )}
         </nav>
 
         {/* Hamburger for mobile */}
@@ -81,17 +110,22 @@ function Header() {
       {/* Mobile nav collapse */}
       {isOpen && (
         <nav className="sm:hidden flex flex-col gap-4 p-4 border-t border-gray-700 bg-gray-800">
-          {/* Center nav items */}
-          {centerNav.map((item, index) => (
-            <Link
-              key={index}
-              to={item.path}
-              className="flex items-center gap-2 text-gray-300 hover:text-white"
-            >
-              {item.icon}
-              {item.name}
-            </Link>
-          ))}
+          {centerNav.map((item, index) => {
+            if (user && (item.name === "SignUp" || item.name === "Login")) {
+              return null;
+            }
+
+            return (
+              <Link
+                key={index}
+                to={item.path}
+                className="flex items-center gap-2 text-gray-300 hover:text-white"
+              >
+                {item.icon}
+                {item.name}
+              </Link>
+            );
+          })}
 
           {/* Right nav items */}
           {rightNav.map((item, index) => (
@@ -104,6 +138,14 @@ function Header() {
               {item.name}
             </Link>
           ))}
+           {user && (
+          <button
+            onClick={handleLogout}
+            className="text-gray-300 hover:text-white ml-4"
+          >
+            Logout
+          </button>
+        )}
         </nav>
       )}
     </header>

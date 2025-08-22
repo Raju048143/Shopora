@@ -1,11 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { useNavigate } from "react-router-dom";
 import ProductImage from "../Product/ProductImage";
-
+import useAuthStore
+ from "../../store/useAuthstore";
 function Cart() {
   const { cart, removeFromCart, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
+    const user = useAuthStore((state) => state.user);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
+  if (!user) {
+    return null;
+  }
   return (
   <div className="mx-auto p-4">
     {cart.length === 0 ? (

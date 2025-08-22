@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../store/useAuthstore";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -7,13 +9,15 @@ const Login = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const API_BASE_URL = import.meta.env.VITE_API_URL;
-  
+
+  const setUser = useAuthStore((state) => state.setUser);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     setMessage("");
 
     try {
-      const res = await  fetch(`${API_BASE_URL}/auth/login`, {
+      const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -23,7 +27,8 @@ const Login = () => {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         setMessage(`Login successful! Welcome ${data.user.name}`);
-         navigate("/profile");
+        setUser(data.user);
+        navigate("/");
       } else {
         setMessage(data.message || "Login failed");
       }
@@ -36,7 +41,9 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Login</h2>
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
+          Login
+        </h2>
 
         {message && (
           <p className="mb-4 text-center text-sm text-red-500">{message}</p>
@@ -76,7 +83,15 @@ const Login = () => {
         </form>
 
         <p className="mt-4 text-center text-gray-600 text-sm">
-          Don't have an account? <span className="text-blue-500 font-medium">Sign Up</span>
+          Don't have an account?{" "}
+          <span className="text-blue-500 font-medium">
+            <Link
+              to="/signup"
+              className="text-blue-500 font-medium hover:underline"
+            >
+              Sign Up
+            </Link>
+          </span>
         </p>
       </div>
     </div>
