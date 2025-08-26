@@ -4,3 +4,4 @@ export { default as Contact } from "./Contact/Contact";
 export { default as ProductDetail } from "./Home/ProductDetail";
 export { default as Login } from "./Login/Login";
 export { default as Signup } from "./Signup/Signup";
+export { default as AdminDashboard } from "./AdminDashboard/AdminDashboard";

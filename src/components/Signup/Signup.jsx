@@ -10,6 +10,7 @@ const Signup = () => {
   const [message, setMessage] = useState("");
   const API_BASE_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
+  const [role, setRole] = useState("user");
 
   const setUser = useAuthStore((state) => state.setUser);
 
@@ -21,12 +22,12 @@ const Signup = () => {
       const res = await fetch(`${API_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password,role }),
       });
 
       const data = await res.json();
       if (res.ok) {
-        setMessage(`Registration successful! Welcome ${data.user.name}`);
+        setMessage(`Registration successful! Welcome `);
         setUser(data.user);
         navigate("/");
       } else {
@@ -85,7 +86,17 @@ const Signup = () => {
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
-
+            <div>
+          <label className="block text-gray-700 mb-1">Role</label>
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition-colors"

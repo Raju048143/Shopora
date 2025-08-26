@@ -13,6 +13,7 @@ import {
   FaSignInAlt,
   FaUserPlus,
   FaSignOutAlt,
+  FaTachometerAlt,
 } from "react-icons/fa";
 import Logo from "../../assets/ShoporaLogo.png";
 import useAuthStore from "../../store/useAuthstore";
@@ -22,7 +23,7 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const clearUser = useAuthStore((state) => state.clearUser);
-
+  console.log("user data", user);
   const handleLogout = () => {
     clearUser();
     document.cookie = "token=; Max-Age=0";
@@ -78,24 +79,35 @@ function Header() {
 
         {/* Right nav (desktop) */}
         <nav className="hidden sm:flex items-center gap-6">
-          {rightNav.map((item, index) => (
+          { (!user || user?.role === "user" )&&
+            rightNav.map((item, index) => (
+              <Link
+                key={index}
+                to={item.path}
+                className="flex items-center gap-2 text-gray-300 hover:text-white"
+              >
+                {item.icon}
+                {item.name}
+              </Link>
+            ))}
+
+          {user?.role === "admin" && (
             <Link
-              key={index}
-              to={item.path}
+              to="/admin"
               className="flex items-center gap-2 text-gray-300 hover:text-white"
             >
-              {item.icon}
-              {item.name}
+              <FaTachometerAlt /> Dashboard
             </Link>
-          ))}
-           {user && (
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 text-gray-300 hover:text-white ml-4"
-          >
-            <FaSignOutAlt/> Logout
-          </button>
-        )}
+          )}
+
+          {user && (
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 text-gray-300 hover:text-white ml-4"
+            >
+              <FaSignOutAlt /> Logout
+            </button>
+          )}
         </nav>
 
         {/* Hamburger for mobile */}
@@ -128,24 +140,34 @@ function Header() {
           })}
 
           {/* Right nav items */}
-          {rightNav.map((item, index) => (
+          {(!user || user?.role === "user") &&
+            rightNav.map((item, index) => (
+              <Link
+                key={index}
+                to={item.path}
+                className="flex items-center gap-2 text-gray-300 hover:text-white"
+              >
+                {item.icon}
+                {item.name}
+              </Link>
+            ))}
+          {user?.role === "admin" && (
             <Link
-              key={index}
-              to={item.path}
+              to="/admin"
               className="flex items-center gap-2 text-gray-300 hover:text-white"
             >
-              {item.icon}
-              {item.name}
+              <FaTachometerAlt /> Dashboard
             </Link>
-          ))}
-           {user && (
-          <button
-            onClick={handleLogout}
-            className="text-gray-300 hover:text-white ml-4"
-          >
-            Logout
-          </button>
-        )}
+          )}
+
+          {user && (
+            <button
+              onClick={handleLogout}
+              className="text-gray-300 hover:text-white ml-4"
+            >
+              Logout
+            </button>
+          )}
         </nav>
       )}
     </header>
