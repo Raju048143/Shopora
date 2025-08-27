@@ -28,9 +28,6 @@ const Login = () => {
         localStorage.setItem("token", data.token);
         setMessage(`Login successful! Welcome ${data.user.name}`);
         setUser(data.user);
-        console.log(data.user)
-        // localStorage.setItem("token", data.token);
-        // localStorage.setItem("role", data.role);
         data.role === "admin" ? navigate("/admin") : navigate("/");
       } else {
         setMessage(data.message || "Login failed");

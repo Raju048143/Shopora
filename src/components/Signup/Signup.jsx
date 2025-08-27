@@ -29,7 +29,7 @@ const Signup = () => {
       if (res.ok) {
         setMessage(`Registration successful! Welcome `);
         setUser(data.user);
-        navigate("/");
+        data.user?.role === "admin" ? navigate("/admin") : navigate("/");
       } else {
         setMessage(data.message || "Signup failed");
       }
